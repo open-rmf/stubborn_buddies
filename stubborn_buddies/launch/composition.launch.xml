@@ -1,0 +1,25 @@
+<?xml version='1.0' ?>                         
+
+<launch>                                       
+
+  <arg name="subns" default="yin" description="Names the composition of nodes"/>
+  <arg name="buddy_subns" default="yang" descrption="Names the buddy composition of nodes" />
+  <arg name="active_node" default="true" description="Indicates if this is the active node"/>
+  <arg name="main_node_name" default="talker" description="Name of the main node in this stubborn_buddies composition"/>
+  <arg name="verbose" default="true" description="Extra verbosity" />
+
+  <node pkg="stubborn_buddies"
+        exec="linktime_composition"
+        output="both"
+        namespace="/$(var main_node_name)/$(var subns)">
+
+    <param name="active_node" value="$(var active_node)" />
+    <param name="subns" value="$(var subns)" />
+    <param name="buddy_subns" value="$(var buddy_subns)" />
+    <param name="main_node_name" value="$(var main_node_name)" />
+    <param name="verbose" value="$(var verbose)" />
+    <param name="run_composition_command" value="ros2 launch stubborn_buddies composition.launch.xml active_node:=false main_node_name:=$(var main_node_name) verbose:=$(var verbose) buddy_subns:=$(var subns) subns:=$(var buddy_subns) &amp;" />
+           
+  </node>
+
+</launch>

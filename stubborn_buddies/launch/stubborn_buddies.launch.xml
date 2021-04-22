@@ -1,0 +1,22 @@
+<?xml version='1.0' ?>
+
+<launch>
+  
+  <arg name="main_node_name" default="talker" description="Name of the main node in this stubborn_buddies composition"/>
+  <arg name="verbose" default="true" description="Extra verbosity" />
+
+  <!-- Launching Yin -->
+  <include file="$(find-pkg-share stubborn_buddies)/launch/composition.launch.xml">
+    <arg name="active_node" value="true"/>
+    <arg name="subns" value="yin"/>
+    <arg name="buddy_subns" value="yang"/>
+  </include>
+
+ <!-- Launching Yang -->
+  <include file="$(find-pkg-share stubborn_buddies)/launch/composition.launch.xml">
+    <arg name="active_node" value="false"/>
+    <arg name="subns" value="yang"/>
+    <arg name="buddy_subns" value="yin"/>
+  </include>
+  
+</launch>

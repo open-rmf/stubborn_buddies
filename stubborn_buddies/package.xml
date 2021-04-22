@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
+<package format="3">
+  <name>stubborn_buddies</name>
+  <version>0.0.0</version>
+  <description>Demo that uses node composition of lifecycle nodes to achieve fail-over robustness on ROS nodes</description>
+  <maintainer email="marco@openrobotics.org">marco</maintainer>
+  <license>Apache License 2.0</license>
+
+  <buildtool_depend>ament_cmake</buildtool_depend>
+  
+  <build_depend>rclcpp</build_depend>
+  <build_depend>rclcpp_components</build_depend>
+  <build_depend>rcutils</build_depend>
+  <build_depend>std_msgs</build_depend>
+  <build_depend>stubborn_buddies_msgs</build_depend>
+  <build_depend>rclcpp_lifecycle</build_depend>
+  
+  <exec_depend>rclcpp</exec_depend>
+  <exec_depend>rclcpp_components</exec_depend>
+  <exec_depend>rcutils</exec_depend>
+  <exec_depend>std_msgs</exec_depend>
+  <exec_depend>stubborn_buddies_msgs</exec_depend>
+  <exec_depend>rclcpp_lifecycle</exec_depend>
+
+  <export>
+    <build_type>ament_cmake</build_type>
+  </export>
+</package>
