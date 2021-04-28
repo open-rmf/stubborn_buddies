@@ -44,7 +44,7 @@ public:
     //command to run the innactive node
     this->declare_parameter<std::string>("run_composition_command", "ros2 launch stubborn_buddies stubborn_buddies.launch.xml active_node:=false");
     this->declare_parameter<std::string>("buddy_subns", std::string());
-    this->declare_parameter<std::string>("main_node_name", std::string());
+    this->declare_parameter<std::string>("namespace", std::string());
     this->declare_parameter<bool>("verbose", true);
 
     configure();
@@ -57,7 +57,7 @@ public:
     //Retrieve parameters
     this->get_parameter("active_node", active_node_);
     this->get_parameter("buddy_subns", buddy_subns_);
-    this->get_parameter("main_node_name", main_node_name_);
+    this->get_parameter("namespace", namespace_);
     this->get_parameter("verbose", verbose_);
 
     if(active_node_)
@@ -93,11 +93,11 @@ public:
               }
           };
 
-    heartbeat_topic_="/" + main_node_name_ +
+    heartbeat_topic_="/" + namespace_ +
                       "/" + buddy_subns_ + "/" +
                       std::string(DEFAULT_HEARTBEAT_NAME);
 
-    status_topic_="/" + main_node_name_ +
+    status_topic_="/" + namespace_ +
                   "/" + buddy_subns_ + "/" +
                   std::string(DEFAULT_STATUS_NAME);
 
@@ -176,7 +176,7 @@ private:
   /// The lease duration granted to the remote (heartbeat) publisher
   std::chrono::milliseconds lease_duration_;
   std::string buddy_subns_;
-  std::string main_node_name_;
+  std::string namespace_;
   bool verbose_;
 
 };

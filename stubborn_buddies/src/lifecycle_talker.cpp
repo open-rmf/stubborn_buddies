@@ -42,7 +42,7 @@ public:
     this->declare_parameter<bool>("active_node", true);
     this->declare_parameter<int>("talker_period", 1000);
     this->declare_parameter<std::string>("buddy_subns", "yang");
-    this->declare_parameter<std::string>("main_node_name", std::string());
+    this->declare_parameter<std::string>("namespace", std::string());
     
     configure();
 
@@ -57,9 +57,9 @@ public:
     this->get_parameter("active_node", active_node_);
     talker_publisher_ = this->create_publisher<std_msgs::msg::String>("/chatter", 10);
     this->get_parameter("buddy_subns", buddy_subns_);
-    this->get_parameter("main_node_name", main_node_name_);
-    
-    active_status_topic_ = "/" + main_node_name_ + "/" + buddy_subns_ + "/" + std::string(DEFAULT_STATUS_NAME);
+    this->get_parameter("namespace", namespace_);
+
+    active_status_topic_ = "/" + namespace_ + "/" + buddy_subns_ + "/" + std::string(DEFAULT_STATUS_NAME);
     
     //only suscribe for eventual activation if we are the inactive node
     if(!active_node_)
@@ -160,7 +160,7 @@ private:
   std::chrono::milliseconds talker_period_;
   std::string active_status_topic_;
   std::string buddy_subns_;
-  std::string main_node_name_;
+  std::string namespace_;
 
 };
 

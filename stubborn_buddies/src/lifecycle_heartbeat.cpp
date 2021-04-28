@@ -42,7 +42,7 @@ public:
 
     this->declare_parameter<int>("heartbeat_period", 200);
     this->declare_parameter<std::string>("subns", "yin");
-    this->declare_parameter<std::string>("main_node_name", std::string());
+    this->declare_parameter<std::string>("namespace", std::string());
     this->declare_parameter<bool>("verbose", true);
 
     configure();
@@ -55,7 +55,7 @@ public:
     //Retreive parameters values
     heartbeat_period_ = std::chrono::milliseconds(this->get_parameter("heartbeat_period").as_int());  
     this->get_parameter("subns", subns_);
-    this->get_parameter("main_node_name", main_node_name_);
+    this->get_parameter("namespace", namespace_);
     this->get_parameter("verbose", verbose_);
 
     // Initialize and configure node
@@ -64,7 +64,7 @@ public:
       .liveliness_lease_duration(heartbeat_period_ + LEASE_DELTA)
       .deadline(heartbeat_period_ + LEASE_DELTA);
 
-    heartbeat_topic_ = std::string("/" + main_node_name_ + "/" + subns_ + "/" + DEFAULT_HEARTBEAT_NAME);
+    heartbeat_topic_ = std::string("/" + namespace_ + "/" + subns_ + "/" + DEFAULT_HEARTBEAT_NAME);
     hb_publisher_ = this->create_publisher<stubborn_buddies_msgs::msg::Heartbeat>(heartbeat_topic_, qos_profile_);
 
     RCUTILS_LOG_INFO_NAMED(get_name(), "on_configure() is called.");
@@ -149,7 +149,7 @@ private:
   rclcpp::TimerBase::SharedPtr hb_timer_;
   rclcpp::QoS qos_profile_;
   std::string subns_;
-  std::string main_node_name_;
+  std::string namespace_;
   bool verbose_;
 
 };
