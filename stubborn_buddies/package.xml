@@ -4,7 +4,7 @@
   <name>stubborn_buddies</name>
   <version>1.0.0</version>
   <description>Demo that uses node composition of lifecycle nodes to achieve fail-over robustness on ROS nodes</description>
-  <maintainer email="marco@openrobotics.org">marco</maintainer>
+  <maintainer email="marco@openrobotics.org">Marco A. Gutiérrez</maintainer>
   <license>Apache License 2.0</license>
 
   <buildtool_depend>ament_cmake</buildtool_depend>
